@@ -36,7 +36,7 @@ The Object Detection API has been trained on Microsoft COCO dataset (a dataset o
 
 #### Transfer Learning Architecture
 
-With neural networks, it is possible to use a process called [transfer learning](https://www.tensorflow.org/tutorials/image_retraining) to shorten the amount of time needed to train the entire model. This means we can take an existing model and retrain its final layer(s) to detect hands for us. Tensorflow does offer a few models (in the tensorflow [model zoo](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/detection_model_zoo.md#coco-trained-models-coco-models)).
+With neural networks, it is possible to use a process called [transfer learning](https://www.tensorflow.org/tutorials/image_retraining) to shorten the amount of time needed to train the entire model. This means we can take an existing model and retrain its final layer(s) to detect curb ramps for us. Tensorflow does offer a few models (in the tensorflow [model zoo](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/detection_model_zoo.md#coco-trained-models-coco-models)).
 
 There's a speed/accuracy trade-off when choosing the object detection model, as despicted in the image below:
 
