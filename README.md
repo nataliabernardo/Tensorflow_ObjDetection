@@ -1,7 +1,7 @@
 
 ### Identifying Curb Ramps on Sidewalks through Google Street View images
 
-When I moved to Seattle, one year ago, I noticed that some neighborhoods were not served with disabled-friendly sidewalks, especially because not every corner had a curb ramp. Fortunatelly, the city is making an effort for adding [ADA (Americans with Disabilities Act) compliant curb ramps](http://www.ada-compliance.com/ada-compliance/cub-ramp) on its streets. 
+When I moved to Seattle, one year ago, I noticed that some neighborhoods were not served with disabled-friendly sidewalks, especially because not every corner had a curb ramp. Fortunatelly, the City is making an effort for adding [ADA (Americans with Disabilities Act) compliant curb ramps](http://www.ada-compliance.com/ada-compliance/cub-ramp) on its streets. 
 
 <p align="center"> <img src="/images/ADA.png" width="90%"></p>
 
@@ -23,7 +23,7 @@ After that, I manually labelled 1500 images, drawing rectangles around curb ramp
 
 There are different ways of identifying a  specific class on images, as illustrated in the picture below.
 
-<p align="center"> <img src="post_images/image_detection.jpg" width="90%"></p>
+<p align="center"> <img src="/images/image_detection.jpg" width="90%"></p>
 <p align="center"><font size="1">Source: <a href="https://research.fb.com/learning-to-segment/">Facebook Research</a></font></p> 
 
 For this project I chose the object detection method. First, because since I'm training images with custom classes, it requires drawing simple bounding boxes around the ramps, instead of polygons as in segmentation. And I believe it would be a tricky task to use the classification method on a new category. 
@@ -40,10 +40,12 @@ With neural networks, it is possible to use a process called [transfer learning]
 
 There's a speed/accuracy trade-off when choosing the object detection model, as despicted in the image below:
 
-<p align="center"> <img src="post_images/models_trade-off.jpg" width="65%"></p>
+<p align="center"> <img src="/images/models_trade-off.jpg" width="65%"></p>
 <p align="center"><font size="1">Source: <a href="https://arxiv.org/pdf/1611.10012.pdf">Speed/accuracy trade-offs for modern convolutional object detectors</a></font></p>
   
 The sweet spot is the “elbow” part of the mAP (Mean Average Precision) vs GPU time graph. Based on that, I chose to use [Faster R-CNN](https://arxiv.org/pdf/1506.01497.pdf) object detection model, with [RestNet](https://arxiv.org/abs/1512.03385) feature extractor, trained on [COCO](http://cocodataset.org) dataset.
+
+<p align="center"> <img src="/images/transferlearning.png" width="80%"></p>
 
 ### 3. Preparing the Data
 
@@ -99,12 +101,12 @@ python3 models/research/object_detection/export_inference_graph.py \
 
 I tested a few pictures to check if it identifies the curb ramps. I was very happy with the results so far. The results using Faster R-CNN RestNet  were significantly more accurate than in my previous attempt of using SSD MobileNet. You can check some predictions below.
 
-<p align="center"> <img src="post_images/correctly_detected.jpg" width="100%"></p>
+<p align="center"> <img src="/images/correctly_detected.jpg" width="80%"></p>
 
 
 However, it still needs to be improved. As you can see, some ramps are not being detected, or in some cases, the models detects random things as ramps.
 
-<p align="center"> <img src="post_images/wrongly_detected.jpg" width="100%"></p>
+<p align="center"> <img src="/images/wrongly_detected.jpg" width="80%"></p>
 
 ### 6. Next Steps
 
