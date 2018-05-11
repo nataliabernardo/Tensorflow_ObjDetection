@@ -1,17 +1,21 @@
 
 ### Identifying Curb Ramps on Sidewalks through Google Street View images
 
-When I moved to Seattle, one year ago, I noticed that some neighborhoods were not served with disabled-friendly sidewalks, especially because not every corner had a curb ramp. Fortunatelly, the American cities are making an effort for adding [ADA (Americans with Disabilities Act) compliant curb ramps](http://www.ada-compliance.com/ada-compliance/cub-ramp) on the streets. 
+When I moved to Seattle, one year ago, I noticed that some neighborhoods were not served with disabled-friendly sidewalks, especially because not every corner had a curb ramp. Fortunatelly, the city is making an effort for adding [ADA (Americans with Disabilities Act) compliant curb ramps](http://www.ada-compliance.com/ada-compliance/cub-ramp) on its streets. 
 
 <p align="center"> <img src="/images/ADA.png" width="90%"></p>
 
+The Seattle Department of Transportation (SDOT) just started implementing a [Pedestrian Master Plan](https://www.theurbanist.org/2018/02/08/sdot-unveils-first-five-year-pedestrian-implementation-plan/),that required a minutious assessment of curb ramp’s condition. However this work is costly, usually made by mapathons, and not all cities have enough resources. 
 
-However, the assessment of curb ramp’s condition is costly, usually made by mapathons, and not all cities have enough resources. So, the goal of my project is to try to do this task by recognizing the curb ramps directly on Google Street View images, using convolutional neural network. More specifically, Tensorflow Object Detection. 
-
+So, the goal of my project is to try to do this task by recognizing the curb ramps directly on Google Street View images, using convolutional neural network. More specifically, Tensorflow Object Detection. 
   
 ### 1. Extracting images from Google Street View
 
-The images used for this project were the pictures of intersections, extracted by Google Street View API. Fortunately, a University of Washington project named [AccessMap](https://accessmap.io), designed to improve the sidewalk data for pedestrians, provided the coordinates of all intersections in Seattle.
+The images used for this project were the pictures of intersections, extracted by Google Street View API. Fortunately, a University of Washington project named [AccessMap](https://accessmap.io), designed to improve the sidewalk data for pedestrians, provided the coordinates of all intersections in Seattle, using SDOT data.
+
+After that, I manually labelled 1500 images, drawing rectangles around curb ramps for teaching the model what object I’m trying to recognize (I will explain it later).
+
+<p align="center"> <img src="/images/data_collection.png" width="90%"></p>
 
 ### 2. Choosing the Model
 
@@ -45,7 +49,7 @@ The sweet spot is the “elbow” part of the mAP (Mean Average Precision) vs GP
 
 #### Label the images
 
-First, I filtered the streets' intersections images that were classified by [AccessMap](https://accessmap.io) as having curb ramps. Afterwards, I draw retangles around yellow (with tactile warning) and grey curb ramps (without tactile warning) in 1000 images using [VOTT](https://github.com/Microsoft/VoTT/releases). I found this labelling tool more user-friendly than Rectlabel.
+First, I filtered the streets' intersections images that were classified by SDOT as having curb ramps. Afterwards, I draw retangles around yellow (with tactile warning) and grey curb ramps (without tactile warning) in 1000 images using [VOTT](https://github.com/Microsoft/VoTT/releases). I found this labelling tool more user-friendly than Rectlabel.
 
 #### Convert data to TFRecord format
 
