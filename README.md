@@ -1,8 +1,14 @@
 
 ### Identifying Curb Ramps on Sidewalks through Google Street View images
 
-Write about why detect curb ramps and assumptions
-  
+When I moved to Seattle, one year ago, I noticed that some neighborhoods were not served with disabled-friendly sidewalks, especially because not every corner had a curb ramp. Fortunatelly, the American cities are making an effort for adding [ADA (Americans with Disabilities Act) compliant curb ramps](http://www.ada-compliance.com/ada-compliance/cub-ramp) on the streets. 
+
+
+
+
+However, the assessment of curb ramp’s condition is costly, usually made by mapathons, and not all cities have enough resources. So, the goal of my project is to try to do this task by recognizing the curb ramps directly on Google Street View images, using convolutional neural network. More specifically, Tensorflow Object Detection. 
+
+  
 ### 1. Extracting images from Google Street View
 
 The images used for this project were the pictures of intersections, extracted by Google Street View API. Fortunately, a University of Washington project named [AccessMap](https://accessmap.io), designed to improve the sidewalk data for pedestrians, provided the coordinates of all intersections in Seattle.
