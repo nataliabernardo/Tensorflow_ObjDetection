@@ -5,7 +5,7 @@ When I moved to Seattle, one year ago, I noticed that some neighborhoods were no
 
 <p align="center"> <img src="/images/ADA.png" width="90%"></p>
 
-The Seattle Department of Transportation (SDOT) just started implementing a [Pedestrian Master Plan](https://www.theurbanist.org/2018/02/08/sdot-unveils-first-five-year-pedestrian-implementation-plan/),that required a minutious assessment of curb ramp’s condition. However this work is costly, usually made by mapathons, and not all cities have enough resources. 
+The Seattle Department of Transportation (SDOT) just started implementing a [Pedestrian Master Plan](https://www.theurbanist.org/2018/02/08/sdot-unveils-first-five-year-pedestrian-implementation-plan/), that required a minutious assessment of curb ramp’s condition. However this work is costly, usually made by mapathons, and not all cities have enough resources. 
 
 So, the goal of my project is to try to do this task by recognizing the curb ramps directly on Google Street View images, using convolutional neural network. More specifically, Tensorflow Object Detection. 
   
@@ -32,11 +32,13 @@ Second, as a path to my quest, the Tensorflow Object Detection API - realeased b
 
 #### Tensorflow Object Detection API:
 
-The Object Detection API has been trained on Microsoft COCO dataset (a dataset of about 300,000 images of 90 commonly found objects) with different trainable detection models. The API does the fine-tuning on a pre-trained object detection model with a custom data set and new classes, removing the last 90 neuron classification layer of the network and replacing it with a new layer that outputs 2 categories ("yellow curb ramp" and "gray curb ramp"). It also includes image augmentation, such as flipping and saturation.
+The Object Detection API has been trained on Microsoft COCO dataset (a dataset of about 300,000 images of 90 commonly found objects) with different trainable detection models. The API does the fine-tuning on a pre-trained object detection model with a custom data set and new classes (process called [transfer learning](https://www.tensorflow.org/tutorials/image_retraining)), removing the last 90 neuron classification layer of the network and replacing it with a new layer that outputs 2 categories ("yellow curb ramp" and "gray curb ramp"). It also includes image augmentation, such as flipping and saturation.
 
 #### Transfer Learning Architecture
 
-With neural networks, it is possible to use a process called [transfer learning](https://www.tensorflow.org/tutorials/image_retraining) to shorten the amount of time needed to train the entire model. This means we can take an existing model and retrain its final layer(s) to detect curb ramps for us. Tensorflow does offer a few models (in the tensorflow [model zoo](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/detection_model_zoo.md#coco-trained-models-coco-models)).
+With the transfer learning process is possible to shorten the amount of time needed to train the entire model, by taking adjantage of an existing model and retrain its final layer(s) to detect curb ramps for us. 
+
+Tensorflow does offer a few models (in the tensorflow [model zoo](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/detection_model_zoo.md#coco-trained-models-coco-models)).
 
 There's a speed/accuracy trade-off when choosing the object detection model, as despicted in the image below:
 
