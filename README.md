@@ -51,7 +51,7 @@ The sweet spot is the “elbow” part of the mAP (Mean Average Precision) vs GP
 
 #### Label the images
 
-First, I filtered the streets' intersections images that were classified by SDOT as having curb ramps. Afterwards, I draw retangles around yellow (with tactile warning) and grey curb ramps (without tactile warning) in 1000 images using [VOTT](https://github.com/Microsoft/VoTT/releases). I found this labelling tool more user-friendly than Rectlabel.
+First, I filtered the streets' intersections images that were classified by SDOT as having curb ramps. Afterwards, I draw retangles around yellow (with tactile warning) and grey curb ramps (without tactile warning) in 1500 images using [VOTT](https://github.com/Microsoft/VoTT/releases). I found this labelling tool more user-friendly than Rectlabel.
 
 #### Convert data to TFRecord format
 
