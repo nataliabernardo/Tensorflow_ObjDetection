@@ -101,16 +101,12 @@ python3 models/research/object_detection/export_inference_graph.py \
 
 I tested a few pictures to check if it identifies the curb ramps. I was very happy with the results so far. The results using Faster R-CNN RestNet  were significantly more accurate than in my previous attempt of using SSD MobileNet. You can check some predictions below.
 
-<p align="center"> <img src="/images/correctly_detected.jpg" width="80%"></p>
+<p align="center"> <img src="/images/results.png" width="80%"></p>
 
-
-However, it still needs to be improved. As you can see, some ramps are not being detected, or in some cases, the models detects random things as ramps.
-
-<p align="center"> <img src="/images/wrongly_detected.jpg" width="80%"></p>
+With 75% recall (% of ramps that could be detected) and 80% precision (% correctly detected), the model identified curb ramps, classifying them as likely to be ADA compliant or not compliant. The majority of wrong predictions are false negatives, usually because the ramp is not entirely on the picture, or is distant or all covered by shadow.
 
 ### 6. Next Steps
 
-* Learn how to get the precision and recall
-* Learn how to improve image augmentation
-* Train more images
-* Extract results
+* Expand beyond Fremont.
+* Improve the algorithm for extracting images of corners from Google Street View.
+* Share with City of Seattle.
