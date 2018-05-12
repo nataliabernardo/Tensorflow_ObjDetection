@@ -107,6 +107,6 @@ With 75% recall (% of ramps that could be detected) and 80% precision (% correct
 
 ### 6. Next Steps
 
+* Adjust image augmentation to improve the precision.
+* Improve the algorithm for extracting images of corners from Google Street View, to make sure the ramp is entirely on the image.
 * Expand beyond Fremont.
-* Improve the algorithm for extracting images of corners from Google Street View.
-* Share with City of Seattle.
