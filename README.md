@@ -7,7 +7,7 @@ When I moved to Seattle, one year ago, I noticed that some neighborhoods were no
 
 The Seattle Department of Transportation (SDOT) just started implementing a [Pedestrian Master Plan](https://www.theurbanist.org/2018/02/08/sdot-unveils-first-five-year-pedestrian-implementation-plan/), that required a minutious assessment of curb ramp’s condition. However this work is costly, usually made by mapathons, and not all cities have enough resources. 
 
-So, the goal of my project is to try to do this task by recognizing the curb ramps directly on Google Street View images, using convolutional neural network. More specifically, Tensorflow Object Detection. 
+For this reason, the goal of my project is to try to do this task by recognizing the curb ramps directly on Google Street View images, using convolutional neural network. More specifically, Tensorflow Object Detection. 
   
 ### 1. Extracting images from Google Street View
 
@@ -36,16 +36,16 @@ The Object Detection API has been trained on Microsoft COCO dataset (a dataset o
 
 #### Transfer Learning Architecture
 
-With the transfer learning process is possible to shorten the amount of time needed to train the entire model, by taking adjantage of an existing model and retrain its final layer(s) to detect curb ramps for us. 
-
-Tensorflow does offer a few models (in the tensorflow [model zoo](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/detection_model_zoo.md#coco-trained-models-coco-models)).
+With the transfer learning process it's possible to shorten the amount of time needed to train the entire model. A typical object detection model requires thousands of images and weeks of training, fortunately, we can take advantage of an existing pre-trained model and retrain its final layer(s) to detect curb ramps for us. Tensorflow does offer a few models (in the tensorflow [model zoo](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/detection_model_zoo.md#coco-trained-models-coco-models)).
 
 There's a speed/accuracy trade-off when choosing the object detection model, as despicted in the image below:
 
 <p align="center"> <img src="/images/models_trade-off.jpg" width="65%"></p>
 <p align="center"><font size="1">Source: <a href="https://arxiv.org/pdf/1611.10012.pdf">Speed/accuracy trade-offs for modern convolutional object detectors</a></font></p>
-  
-The sweet spot is the “elbow” part of the mAP (Mean Average Precision) vs GPU time graph. Based on that, I chose to use [Faster R-CNN](https://arxiv.org/pdf/1506.01497.pdf) object detection model, with [RestNet](https://arxiv.org/abs/1512.03385) feature extractor, trained on [COCO](http://cocodataset.org) dataset.
+
+For finding the best pre-trained model for object detection. I tried different arrangements and the one that provided more accurate results at a better speed was the [Faster R-CNN](https://arxiv.org/pdf/1506.01497.pdf), which is a region based convolutional network, using [ResNet](https://arxiv.org/abs/1512.03385) feature extractor.
+
+In fact, the sweet spot is the “elbow” part of the mAP (Mean Average Precision) vs GPU time graph, exactly where the Faster R-CNN with RestNet is located.
 
 <p align="center"> <img src="/images/transferlearning.png" width="80%"></p>
 
