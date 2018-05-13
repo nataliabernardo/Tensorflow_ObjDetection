@@ -115,11 +115,12 @@ I was happy with the results so far. The predictions using Faster R-CNN RestNet 
 
 With 75% recall (% of ramps that could be detected) and 80% precision (% correctly detected), the model identified curb ramps, classifying them as likely to be ADA compliant or not compliant. The majority of wrong predictions are false negatives, usually because the ramp is not entirely on the picture, or is distant or all covered by shadow.
 
-<p align="center"> <img src="/images/rampgif.gif" width="80%"></p>
+I also tested the model in a short video that I recorded in Pioneer Square Seattle, using MoviePy's VideoFileClip, that applies the classification on each frame of the video.
+<p align="center"> <img src="/images/rampgif.gif" width="40%"></p>
 
-I plotted the results on a map. The markers indicate where there is curb ramp and the green ones indicate the ones that are likely to be ADA compliant.
+Finally, I plotted the results on a map. The markers indicate where there is curb ramp and the green ones indicate the ones that are likely to be ADA compliant.
 
-goo.gl/3HWDNF
+<iframe src="https://www.google.com/maps/d/embed?mid=1L6EW2hkMIgIXJQzMItyin3NDNXjf5LSh" width="640" height="480"></iframe>
 
 ### 6. Next Steps
 
