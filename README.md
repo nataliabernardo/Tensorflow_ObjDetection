@@ -58,8 +58,8 @@ In fact, the sweet spot is the “elbow” part of the mAP (Mean Average Precisi
 First, I filtered the streets' intersections images that were classified by SDOT as having curb ramps. Afterwards, I draw retangles around curb ramps in 1500 images using [VOTT](https://github.com/Microsoft/VoTT/releases). I found this labelling tool more user-friendly than Rectlabel.
 
 I decided to distinguish ramps between likely ADA compliant and non-compliant. For this reason, I created 2 classes:
-* Likely ADA compliant curb ramp (with a yellow tactile warning)
-* Likely ADA non-compliant curb ramp (without or grey tactile warning)
+* Yellow: likely ADA compliant curb ramp (with a yellow tactile warning)
+* Grey: likely ADA non-compliant curb ramp (without or grey tactile warning)
 
 #### Convert data to TFRecord format
 
@@ -122,8 +122,11 @@ Finally, I plotted the results on a map. The markers indicate where there is cur
 
 <iframe src="https://www.google.com/maps/d/embed?mid=1L6EW2hkMIgIXJQzMItyin3NDNXjf5LSh" width="640" height="480"></iframe>
 
-### 6. Next Steps
+### 6. Conclusions & Next Steps
 
+I decided to do this project because I wanted to find a cheaper and faster way to assess to curb ramps' condition within a city. And it proved that it’s possible to detect them, identify if they are ADA compliant and automatize this process. There's still room for improvement, however, for those cities that don’t have resources, it’s a good start.
+
+As next steps, I plan to:
 * Adjust image augmentation to improve the precision.
 * Improve the algorithm for extracting images of corners from Google Street View, to make sure the ramp is entirely on the image.
 * Expand beyond Fremont.
