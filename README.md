@@ -7,7 +7,9 @@ When I moved to Seattle, one year ago, I noticed that some neighborhoods were no
 
 The Seattle Department of Transportation (SDOT) just started implementing a [Pedestrian Master Plan](https://www.theurbanist.org/2018/02/08/sdot-unveils-first-five-year-pedestrian-implementation-plan/), that required a minutious assessment of curb ramp’s condition. However this work is costly, usually made by mapathons, and not all cities have enough resources. 
 
-For this reason, the goal of my project is to try to do this task by recognizing the curb ramps directly on Google Street View images, using convolutional neural network. More specifically, Tensorflow Object Detection. 
+For this reason, the goal of my project is to try to do this task by recognizing the curb ramps directly on Google Street View images, using convolutional neural network. More specifically, Tensorflow Object Detection.
+
+As a pilot project, I mapped the curb ramps in Fremont. I chose this neighborhood because it’s very welcoming for pedestrians, with street festivals, touristic spots and tech companies are located there.
   
 ### 1. Extracting images from Google Street View
 
@@ -15,7 +17,7 @@ The images used for this project were the pictures of intersections, extracted b
 
 After that, I manually labelled 1500 images, drawing rectangles around curb ramps for teaching the model what object I’m trying to recognize (I will explain it later).
 
-<p align="center"> <img src="/images/data_collection.png" width="90%"></p>
+<p align="center"> <img src="/images/data_collection.png" width="50%"></p>
 
 ### 2. Choosing the Model
 
@@ -32,7 +34,7 @@ Second, as a path to my quest, the Tensorflow Object Detection API - realeased b
 
 #### Tensorflow Object Detection API:
 
-The Object Detection API has been trained on Microsoft COCO dataset (a dataset of about 300,000 images of 90 commonly found objects) with different trainable detection models. The API does the fine-tuning on a pre-trained object detection model with a custom data set and new classes (process called [transfer learning](https://www.tensorflow.org/tutorials/image_retraining)), removing the last 90 neuron classification layer of the network and replacing it with a new layer that outputs 2 categories ("yellow curb ramp" and "gray curb ramp"). It also includes image augmentation, such as flipping and saturation.
+The Object Detection API has been trained on Microsoft COCO dataset (a dataset of about 300,000 images of 90 commonly found objects) with different trainable detection models. The API does the fine-tuning on a pre-trained object detection model with a custom data set and new classes (process called [transfer learning](https://www.tensorflow.org/tutorials/image_retraining)), removing the last 90 neuron classification layer of the network and replacing it with a new layer that outputs the new classes. It also includes image augmentation, such as flipping and saturation.
 
 #### Transfer Learning Architecture
 
@@ -53,7 +55,11 @@ In fact, the sweet spot is the “elbow” part of the mAP (Mean Average Precisi
 
 #### Label the images
 
-First, I filtered the streets' intersections images that were classified by SDOT as having curb ramps. Afterwards, I draw retangles around yellow (with tactile warning) and grey curb ramps (without tactile warning) in 1500 images using [VOTT](https://github.com/Microsoft/VoTT/releases). I found this labelling tool more user-friendly than Rectlabel.
+First, I filtered the streets' intersections images that were classified by SDOT as having curb ramps. Afterwards, I draw retangles around curb ramps in 1500 images using [VOTT](https://github.com/Microsoft/VoTT/releases). I found this labelling tool more user-friendly than Rectlabel.
+
+I decided to distinguish ramps between likely ADA compliant and non-compliant. For this reason, I created 2 classes:
+* Likely ADA compliant curb ramp (with a yellow tactile warning)
+* Likely ADA non-compliant curb ramp (without or grey tactile warning)
 
 #### Convert data to TFRecord format
 
@@ -89,7 +95,7 @@ Finally, I could train the model, using the command:
 
 I used tensorflow-gpu 1.5 on a Win10 machine with a NVIDIA GeForce GTX 970 4GB, following the installation steps described on the [Tensorflow website](https://www.tensorflow.org/install/install_windows). By using a GPU, the training was 10+ times faster than using tensorflow without GPU support on a MacBook.
 
-Once training was complete it was time to test the model. The following command export the inference graph based on the best checkpoint:
+I split the images dataset into aproximatelly 80%-20% train/test. Once training was complete it was time to test the model. The following command export the inference graph based on the best checkpoint:
 
 ```
 python3 models/research/object_detection/export_inference_graph.py \
@@ -99,13 +105,21 @@ python3 models/research/object_detection/export_inference_graph.py \
     --output_directory object_detection_graph
 ```
 
+Finally, I applied the trained model to the images of corners in Fremont.
+
 ### 5. Results!
 
-I tested a few pictures to check if it identifies the curb ramps. I was very happy with the results so far. The results using Faster R-CNN RestNet  were significantly more accurate than in my previous attempt of using SSD MobileNet. You can check some predictions below.
+I was happy with the results so far. The predictions using Faster R-CNN RestNet were significantly more accurate than in my previous attempt of using SSD MobileNet.
 
 <p align="center"> <img src="/images/results.png" width="80%"></p>
 
 With 75% recall (% of ramps that could be detected) and 80% precision (% correctly detected), the model identified curb ramps, classifying them as likely to be ADA compliant or not compliant. The majority of wrong predictions are false negatives, usually because the ramp is not entirely on the picture, or is distant or all covered by shadow.
+
+<p align="center"> <img src="/images/rampgif.gif" width="80%"></p>
+
+I plotted the results on a map. The markers indicate where there is curb ramp and the green ones indicate the ones that are likely to be ADA compliant.
+
+goo.gl/3HWDNF
 
 ### 6. Next Steps
 
