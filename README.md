@@ -7,7 +7,7 @@ When I moved to Seattle, one year ago, I noticed that some neighborhoods were no
 
 The Seattle Department of Transportation (SDOT) just started implementing a [Pedestrian Master Plan](https://www.theurbanist.org/2018/02/08/sdot-unveils-first-five-year-pedestrian-implementation-plan/), that required a minutious assessment of curb ramp’s condition. However, this work is costly usually being executed through mapathons. And not all cities have enough resources to do it.
 
-For this reason, the goal of my project is to try to automatize this task and make it accessible to other cities, by recognizing the curb ramps directly from Google Street View’s images,by using a convolutional neural network that I will train. More specifically, using Tensorflow Object Detection.
+For this reason, the goal of my project is to try to automatize this task and make it accessible to other cities, by recognizing the curb ramps directly from Google Street View’s images, with a convolutional neural network classifier. More specifically, using Tensorflow Object Detection.
 
 As a pilot project, I mapped the curb ramps in Fremont. I chose this neighborhood because it’s very welcoming for pedestrians, with street festivals, touristic spots and with many tech companies located there.
   
