@@ -133,3 +133,6 @@ As next steps, I plan to:
 * Adjust the image augmentation to improve the precision.
 * Improve the algorithm for extracting images of corners from Google Street View, to make sure that the ramp is entirely on the image.
 * Expand to Seattle, beyond Fremont.
+
+
+Thanks for coming! If you want to see my other projects, you can check my [blog](http://nataliabernardo.info).
