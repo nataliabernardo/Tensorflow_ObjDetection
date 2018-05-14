@@ -17,7 +17,7 @@ The images used for this project were the pictures of intersections, extracted f
 
 After that, I manually labelled 1500 images, drawing rectangles around the curb ramps for teaching the model which object I’m trying to recognize (I will explain the labelling process later).
 
-<p align="center"> <img src="/images/data_collection.png" width="50%"></p>
+<p align="center"> <img src="/images/data_collection.png" width="90%"></p>
 
 ### 2. Choosing the Model
 
